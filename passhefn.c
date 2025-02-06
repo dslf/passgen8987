@@ -12,6 +12,8 @@
 int main(){
 
     int bit_mask = LOWER;
+    int passwd_length = 20;
+    int passwd_numbers = 5;
 
     char array_lower_case[] = "abcdefghijklmnopqrstuvwxyz";
     char array_upper_case[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -78,7 +80,16 @@ int main(){
         combined = temp;
         strcat(combined, array_specials);
     }
+    
+    int buffer_length = strlen(combined);
+    printf("%s (size of combined: %d)\n", combined, buffer_length);
 
-    printf("%s (size of combined: %d)\n", combined, strlen(combined));
+    srand(time(NULL));
+    for (int i = 0; i < passwd_numbers; i++){
+        for (int j = 0; j < passwd_length; j++){
+            putchar(combined[rand() % buffer_length]);
+        }
+    printf("\n");
+    }
     free(combined);
 }
