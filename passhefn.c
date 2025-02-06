@@ -9,25 +9,23 @@
 #define DIGIT 4
 #define SPECI 8
 
-void shuffle_combined(char *combi){
-    int len = strlen(combi);
-    int j;
+void shuffle_combined(char *combi, int len){
+    int j, temp;
     srand(time(NULL));
-
+//    printf("%d ", time(NULL));
 	for (int i = 0; i < len; i++){
-		j = i + rand() % (len-i);
-		int temp = combi[i];
+		j = i + rand() % ((len)-i);		
+        temp = combi[i]; 
 		combi[i] = combi[j];
 		combi[j] = temp;
 	}
-
 }
 
 int main(){
 
-    int bit_mask = LOWER+UPPER+DIGIT;
-    int passwd_length = 120;
-    int passwd_numbers = 5;
+    int bit_mask = LOWER+UPPER+DIGIT+SPECI;
+    int passwd_length = 20;
+    int passwd_numbers = 20;
 
     char array_lower_case[] = "abcdefghijklmnopqrstuvwxyz";
     char array_upper_case[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -42,10 +40,10 @@ int main(){
     }
     *combined = '\0';
 
-    if (bit_mask & LOWER) printf("lower\n");
+/*     if (bit_mask & LOWER) printf("lower\n");
     if (bit_mask & UPPER) printf("upper\n");
     if (bit_mask & DIGIT) printf("digit\n");
-    if (bit_mask & SPECI) printf("special\n");
+    if (bit_mask & SPECI) printf("special\n"); */
 
     if (bit_mask & LOWER) {
         char *temp;
@@ -96,16 +94,19 @@ int main(){
     }
     
     int buffer_length = strlen(combined);
-    printf("%s (size of combined: %d)\n", combined, buffer_length);
+/*     printf("%s (size of combined: %d)\n", combined, buffer_length);
     shuffle_combined(combined);
-    printf("%s (size of shuffled: %d)\n", combined, buffer_length);
+    printf("%s (size of shuffled: %d)\n", combined, buffer_length); */
 
     srand(time(NULL));
+   // printf("%d ", time(NULL));
+    int len = strlen(combined);
     for (int i = 0; i < passwd_numbers; i++){
-        shuffle_combined(combined);
+        shuffle_combined(combined, len);
         for (int j = 0; j < passwd_length; j++){
             putchar(combined[rand() % buffer_length]);
         }
+    //printf(" (shuffle: %s)\n", combined);
     printf("\n");
     }
     free(combined);
