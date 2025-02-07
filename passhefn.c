@@ -1,4 +1,3 @@
-// !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -12,7 +11,6 @@
 void shuffle_combined(char *combi, int len){
     int j, temp;
     srand(time(NULL));
-//    printf("%d ", time(NULL));
 	for (int i = 0; i < len; i++){
 		j = i + rand() % ((len)-i);		
         temp = combi[i]; 
@@ -22,7 +20,6 @@ void shuffle_combined(char *combi, int len){
 }
 
 int main(){
-
     int bit_mask = LOWER+UPPER+DIGIT+SPECI;
     int passwd_length = 20;
     int passwd_numbers = 20;
@@ -40,17 +37,12 @@ int main(){
     }
     *combined = '\0';
 
-/*     if (bit_mask & LOWER) printf("lower\n");
-    if (bit_mask & UPPER) printf("upper\n");
-    if (bit_mask & DIGIT) printf("digit\n");
-    if (bit_mask & SPECI) printf("special\n"); */
-
     if (bit_mask & LOWER) {
         char *temp;
         temp = realloc(combined, strlen(combined) + strlen(array_lower_case) + 1);
         if (!temp) {
             free(combined);
-            printf("err realloc\n");
+            printf("err lower realloc\n");
             return 1;
         }
         combined = temp;
@@ -62,7 +54,7 @@ int main(){
         temp = realloc(combined, strlen(combined) + strlen(array_upper_case) + 1);
         if (!temp) {
             free(combined);
-            printf("err realloc\n");
+            printf("err upper realloc\n");
             return 1;
         }
         combined = temp;
@@ -74,7 +66,7 @@ int main(){
         temp = realloc(combined, strlen(combined) + strlen(array_digits) + 1);
         if (!temp) {
             free(combined);
-            printf("err realloc\n");
+            printf("err digit realloc\n");
             return 1;
         }
         combined = temp;
@@ -86,7 +78,7 @@ int main(){
         temp = realloc(combined, strlen(combined) + strlen(array_specials) + 1);
         if (!temp) {
             free(combined);
-            printf("err realloc\n");
+            printf("err special realloc\n");
             return 1;
         }
         combined = temp;
@@ -94,19 +86,14 @@ int main(){
     }
     
     int buffer_length = strlen(combined);
-/*     printf("%s (size of combined: %d)\n", combined, buffer_length);
-    shuffle_combined(combined);
-    printf("%s (size of shuffled: %d)\n", combined, buffer_length); */
 
     srand(time(NULL));
-   // printf("%d ", time(NULL));
     int len = strlen(combined);
     for (int i = 0; i < passwd_numbers; i++){
         shuffle_combined(combined, len);
         for (int j = 0; j < passwd_length; j++){
             putchar(combined[rand() % buffer_length]);
         }
-    //printf(" (shuffle: %s)\n", combined);
     printf("\n");
     }
     free(combined);
