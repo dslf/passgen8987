@@ -9,10 +9,10 @@
 #define DIGIT 4
 #define SPECI 8
 
-void shuffle_combined(char *combi, int len){
+void shuffle_combined(char *combi, int len) { 
     int j, temp;
     srand(time(NULL));
-	for (int i = 0; i < len; i++){
+	for (int i = 0; i < len; i++) {
 		j = i + rand() % ((len)-i);		
         temp = combi[i]; 
 		combi[i] = combi[j];
